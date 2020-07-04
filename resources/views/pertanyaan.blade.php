@@ -10,7 +10,7 @@ Buat Pertanyaan</a>
 @foreach($data as $key => $values)
 <div class="card">
 	<div class="card-header">
-		<h3 class="card-title">{{ $values->judul }}</h3>
+		<h3 class="card-title"><a href="/pertanyaan/show/{{ $values->id }}">{{ $values->judul }}</a></h3>
 	</div>
 	<div class="card-body">
 		{{ $values->isi }}
@@ -21,7 +21,7 @@ Buat Pertanyaan</a>
 		<a href="/jawaban/{{ $values->id }}" class="btn btn-success"><i class="fa fa-reply" aria-hidden="true"></i>
 		jawaban</a>
 		<a href="#" class="btn btn-danger"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
-		<a href="#" class="btn btn-dark"><i class="fa fa-thumbs-down" aria-hidden="true"></i></i></a>
+		<a href="#" class="btn btn-dark"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
 	</div>
 </div>
 @endforeach

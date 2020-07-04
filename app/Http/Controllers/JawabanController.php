@@ -29,7 +29,7 @@ class JawabanController extends Controller
          $data = [
 
             'isi'             => $request->isi,
-            'tgl_dibuat'      => date('Y-m-d H:i:s'),
+            'tgl_dibuat'      => now(),
             'jawaban_terpilih'=> false,
             'likes'           => 0,
             'dislikes'        => 0,
@@ -37,15 +37,10 @@ class JawabanController extends Controller
 
          ];
 
-         if ($pertanyaans = JawabanModel::save($data)) {
+         $pertanyaans = JawabanModel::save($data);
             
-            return redirect('/jawaban/' . $id);
+         return redirect('/pertanyaan/show/' . $id);
 
-         } else {
-
-            return redirect('/jawaban/' . $id);
-
-         }
 
       }
 

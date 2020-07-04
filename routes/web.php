@@ -17,9 +17,15 @@ Route::get('/', function () {
 
 // Pertanyaan
 Route::get('/pertanyaan', 'PertanyaanController@index');
+Route::get('/pertanyaan/show/{id}', 'PertanyaanController@show');
+
+Route::get('/pertanyaan/{id}/edit', 'PertanyaanController@edit');
+Route::put('/pertanyaan/{id}', 'PertanyaanController@update');
+
 Route::post('/pertanyaan', 'PertanyaanController@store');
 Route::get('/pertanyaan/create', 'PertanyaanController@create');
 
+Route::delete('/pertanyaan/{id}', 'PertanyaanController@delete');
 
 // Jawaban
 Route::get('/jawaban/{id}', 'JawabanController@index');

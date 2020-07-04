@@ -26,8 +26,8 @@ class PertanyaanController extends Controller
    		$data = [
 
    			'judul'			=>	$request->judul,
-   			'isi'			=>	$request->isi,
-   			'tgl_dibuat'	=>	date('Y-m-d H:i:s'),
+   			'isi'			   =>	$request->isi,
+   			'tgl_dibuat'	=>	now(),
    			'likes'			=>	0,
    			'dislikes'		=>	0
 
@@ -44,5 +44,54 @@ class PertanyaanController extends Controller
    		}
 
    	}
+
+      public function show($id){
+
+         $pertanyaans = PertanyaanModel::findByIdWithAnswer($id);
+
+         $message = "";
+
+         if (!isset($pertanyaans[0])) {
+
+            $pertanyaans = PertanyaanModel::findById($id);
+            
+            $message = "Tidak ada Jawaban";
+
+         }
+
+         return view('pertanyaan_detail', ['data' => $pertanyaans, 'message' => $message, 'id' => $id]);
+
+      }
+
+      public function edit($id){
+
+         $pertanyaan = PertanyaanModel::findById($id);
+
+         return view('edit_pertanyaan', ['data' => $pertanyaan]);
+
+      }
+
+      public function update($id, Request $request){
+
+         $data = 
+                  [
+                     'judul'  => $request->judul,
+                     'isi'    => $request->isi
+
+                  ];
+
+         $pertanyaan = PertanyaanModel::update($id, $data);
+
+         return redirect('/pertanyaan/show/' . $id);
+
+      }
+
+      public function delete($id){
+
+         $pertanyaan = PertanyaanModel::delete($id);
+
+         return redirect('/pertanyaan');
+
+      }
 
 }
